@@ -26,3 +26,13 @@ and course_semester.course_code = "[couser's code]"
 group by semester.name, semester.id
 order by count(semester.id) desc
 limit 1;
+
+--number of inactive users for this course
+select count(*) from user_account
+full join student_user on student_user.user_id = user_account.id
+full join lecturer_user on lecturer_user.user_id = user_account.id
+full join student_course on student_course.student_id = student_user.student_id
+full join lecturer_course on lecturer_course.lecturer_id = lecturer_user.lecturer_id
+where user_account.is_active = false
+and (lecturer_course.course_code = 'M1'
+or student_course.course_code = 'M1');
