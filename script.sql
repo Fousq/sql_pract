@@ -1,11 +1,11 @@
 --calculate the number of students of each course;
-select course.code, count(*) from student
+select course.code, count(*) AS "Number of student" from student
 inner join student_course on student.id = student_course.student_id 
 inner join course on course.code = student_course.course_code 
 group by course.code;
 
 --amount of lecturers of this course;
-select count(*) from lecturer_course where course_code="[couser's code]";
+select count(*) from lecturer_course where lecturer_course.course_code="[couser's code]";
 
 --name of the lecturer with the higest academic degree on this course
 select lecturer.name from lecturer
@@ -36,3 +36,5 @@ full join lecturer_course on lecturer_course.lecturer_id = lecturer_user.lecture
 where user_account.is_active = false
 and (lecturer_course.course_code = 'M1'
 or student_course.course_code = 'M1');
+ 
+--https://www.postgresql.org/docs/9.1/tutorial-window.html
